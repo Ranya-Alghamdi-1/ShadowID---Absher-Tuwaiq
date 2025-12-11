@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>هوية الظل - الهوية الرقمية الآمنة</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="mobile-container">
+    <div class="container" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <!-- Animated Logo -->
+      <div style="position: relative; width: 120px; height: 120px; margin-bottom: 2rem;">
+        <div class="animate-glow" style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); display: flex; align-items: center; justify-content: center;">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div class="animate-pulse" style="position: absolute; inset: -10px; border-radius: 50%; border: 2px solid var(--color-primary); opacity: 0.3;"></div>
+      </div>
+
+      <h1 class="mb-2 text-center">هوية الظل</h1>
+      <p class="text-secondary text-center mb-4">آمن. خاص. تحت سيطرتك</p>
+      
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <script>
+    // Redirect to auth page after 2 seconds
+    setTimeout(() => {
+      window.location.href = 'auth.html';
+    }, 2000);
+  </script>
+</body>
+</html>

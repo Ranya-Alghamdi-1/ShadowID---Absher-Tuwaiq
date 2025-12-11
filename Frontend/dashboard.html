@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>هوية الظل - الرئيسية</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+
+
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- Header -->
+        <header style="margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <img src="logo.png" alt="هوية الظل" style="height: 123px; width: auto;">
+                <div style="flex: 1; position: relative;">
+                    <input type="text"
+                           placeholder="ابحث في توكلنا"
+                           style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 1rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 12px; color: var(--color-text); font-size: 0.875rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Quick Access Section -->
+            <div class="section-header">
+                <h3 class="section-title">الوصول السريع</h3>
+            </div>
+
+            <div class="quick-access-scroll" id="quickAccessScroll">
+                <a href="#" class="quick-access-item">
+                    <span class="quick-access-text">هوية الظل</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </a>
+
+                <a href="#" class="quick-access-item">
+                    <span class="quick-access-text">التقويم</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5">
+                        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </a>
+
+                <a href="#" class="quick-access-item">
+                    <span class="quick-access-text">إحسان</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#00d26a" stroke="#00d26a" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 12l2 2 4-4" stroke="#000" fill="none" stroke-width="2"></path>
+                    </svg>
+                </a>
+
+                <a href="#" class="quick-access-item">
+                    <span class="quick-access-text">المستندات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </a>
+
+                <a href="#" class="quick-access-item">
+                    <span class="quick-access-text">الجهات</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="nav-dots" id="navDots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+                <div class="dot" data-index="4"></div>
+            </div>
+
+            <!-- QR Card -->
+            <div class="qr-card" onclick="window.location.href='id-details.html'">
+
+                <div class="qr-frame">
+                    <canvas id="qrCanvas" width="176" height="176"></canvas>
+                </div>
+
+                <p class="token-label">رمز مؤقت</p>
+                <div class="token-value" id="tokenDisplay">SID---------</div>
+
+                <!-- مدة الصلاحية -->
+                <div class="info-row" onclick="event.stopPropagation();">
+                    <div class="info-left">
+                        <div class="info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <span class="info-label">صالح لمدة</span>
+                        <div class="pulse-dot"></div>
+                    </div>
+                    <span class="info-value" id="timerDisplay">03:00</span>
+                </div>
+
+                <!-- الموقع -->
+                <div class="info-row" onclick="event.stopPropagation();">
+                    <div class="info-left">
+                        <div class="info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <span class="info-label">الموقع</span>
+                    </div>
+                    <span class="info-value location" id="locationDisplay">الرياض، المنطقة الوسطى</span>
+                </div>
+
+
+                <!-- زر توليد جديد -->
+                <button class="generate-btn" id="generateBtn" onclick="event.stopPropagation(); generateNewID();">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                    توليد رمز جديد
+                </button>
+
+            </div>
+
+            <!-- استكشف الخدمات Section -->
+            <section class="services-section">
+                <div class="section-header">
+                    <h3 class="section-title">استكشف الخدمات</h3>
+                    <a href="#" class="section-link">
+                        عرض الكل
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Row 1 -->
+                    <a href="activity.html" class="service-card">
+                        <div class="service-icon blue">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                        </div>
+                        <span class="service-name">سجل النشاط</span>
+                    </a>
+
+                    <a href="risk.html" class="service-card">
+                        <div class="service-icon red">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <span class="service-name">محرك المخاطر</span>
+                    </a>
+
+                    <a href="settings.html" class="service-card">
+                        <div class="service-icon purple">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <span class="service-name">الإعدادات</span>
+                    </a>
+
+                    <!-- Row 2 -->
+
+
+                    <a href="devices.html" class="service-card">
+                        <div class="service-icon yellow">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.5">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                        </div>
+                        <span class="service-name">الأجهزة</span>
+                    </a>
+
+                    <a href="privacy.html" class="service-card">
+                        <div class="service-icon pink">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <span class="service-name">الخصوصية</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Security Status Section -->
+            <section class="security-section">
+                <div class="section-header">
+                    <h3 class="section-title">الحماية النشطة</h3>
+                </div>
+
+                <div class="security-grid">
+                    <div class="security-badge">
+                        <div class="security-icon green">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d26a" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <span class="security-label">تشفير متقدم</span>
+                    </div>
+
+                    <div class="security-badge">
+                        <div class="security-icon cyan">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <span class="security-label">نقل آمن</span>
+                    </div>
+
+                    <div class="security-badge">
+                        <div class="security-icon purple">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <span class="security-label">توثيق موثق</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: var(--color-card); border-top: 1px solid var(--color-border); padding: 0.75rem 1rem; z-index: 100;">
+            <div class="flex justify-between items-center" style="max-width: 350px; margin: 0 auto;">
+                <a href="profile.html" class="flex flex-col items-center gap-1" style="color: var(--color-primary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span style="font-size: 0.65rem;">معلوماتي</span>
+                </a>
+                <a href="activity.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span style="font-size: 0.65rem;">السجل</span>
+                </a>
+                <a href="dashboard.html" class="flex flex-col items-center gap-1" style="color: var(--color-text); text-decoration: none; min-width: 60px;">
+                    <div style="width: 44px; height: 44px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -20px; box-shadow: 0 4px 15px rgba(0, 210, 106, 0.4);">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <span style="font-size: 0.65rem;">الخدمات</span>
+                </a>
+                <a href="risk.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span style="font-size: 0.65rem;">واكب</span>
+                </a>
+                <a href="settings.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+                        <img src="logo.png" alt="" style="width: 20px; height: 20px; object-fit: contain;">
+                    </div>
+                    <span style="font-size: 0.65rem;">هوية الظل</span>
+                </a>
+            </div>
+        </nav>
+
+    </div>
+
+    <script>
+       
+        function generateQRCode(text, canvas) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            const moduleCount = 25;
+            const moduleSize = size / moduleCount;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, size, size);
+
+            let seed = 0;
+            for (let i = 0; i < text.length; i++) {
+                seed += text.charCodeAt(i);
+            }
+
+            function pseudoRandom() {
+                seed = (seed * 9301 + 49297) % 233280;
+                return seed / 233280;
+            }
+
+            ctx.fillStyle = '#000000';
+
+            for (let row = 0; row < moduleCount; row++) {
+                for (let col = 0; col < moduleCount; col++) {
+                    const isFinderPattern =
+                        (row < 7 && col < 7) ||
+                        (row < 7 && col > moduleCount - 8) ||
+                        (row > moduleCount - 8 && col < 7);
+
+                    if (isFinderPattern) {
+                        const inFinder =
+                            (row >= 1 && row <= 5 && col >= 1 && col <= 5) ||
+                            (row >= 1 && row <= 5 && col >= moduleCount - 6 && col <= moduleCount - 2) ||
+                            (row >= moduleCount - 6 && row <= moduleCount - 2 && col >= 1 && col <= 5);
+
+                        const inInnerFinder =
+                            (row >= 2 && row <= 4 && col >= 2 && col <= 4) ||
+                            (row >= 2 && row <= 4 && col >= moduleCount - 5 && col <= moduleCount - 3) ||
+                            (row >= moduleCount - 5 && row <= moduleCount - 3 && col >= 2 && col <= 4);
+
+                        if (inFinder && !inInnerFinder) {
+                            ctx.fillRect(col * moduleSize, row * moduleSize, moduleSize, moduleSize);
+                        } else if (inInnerFinder) {
+                            ctx.fillRect(col * moduleSize, row * moduleSize, moduleSize, moduleSize);
+                        }
+                    } else {
+                        if (pseudoRandom() > 0.5) {
+                            ctx.fillRect(col * moduleSize, row * moduleSize, moduleSize, moduleSize);
+                        }
+                    }
+                }
+            }
+        }
+
+        let currentToken = '';
+        let timeRemaining = 180;
+        let timerInterval = null;
+
+        function generateToken() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let token = 'SID-';
+            for (let i = 0; i < 8; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            token += '-';
+            for (let i = 0; i < 8; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            if (timeRemaining <= 0) {
+                generateNewID();
+                return;
+            }
+            timeRemaining--;
+            const timerEl = document.getElementById('timerDisplay');
+            timerEl.textContent = formatTime(timeRemaining);
+
+            if (timeRemaining <= 30) {
+                timerEl.style.color = '#ef4444';
+            } else {
+                timerEl.style.color = '#00d26a';
+            }
+        }
+
+        function generateNewID() {
+            currentToken = generateToken();
+            document.getElementById('tokenDisplay').textContent = currentToken;
+
+            const canvas = document.getElementById('qrCanvas');
+            generateQRCode(currentToken, canvas);
+
+            if (timerInterval) clearInterval(timerInterval);
+            timeRemaining = 180;
+            document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
+            document.getElementById('timerDisplay').style.color = '#00d26a';
+            timerInterval = setInterval(updateTimer, 1000);
+
+            localStorage.setItem('shadowID', JSON.stringify({
+                token: currentToken,
+                timestamp: Date.now(),
+                expiresAt: Date.now() + 180000
+            }));
+        }
+
+        const scrollContainer = document.getElementById('quickAccessScroll');
+        const dots = document.querySelectorAll('.dot');
+
+        scrollContainer.addEventListener('scroll', () => {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const itemWidth = 145;
+            const activeIndex = Math.round(scrollLeft / itemWidth);
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const itemWidth = 145;
+                scrollContainer.scrollTo({
+                    left: index * itemWidth,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        generateNewID();
+    </script>
+
+</body>
+</html>

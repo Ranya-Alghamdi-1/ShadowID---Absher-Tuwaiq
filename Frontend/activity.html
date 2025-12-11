@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سجل النشاط - هوية الظل</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="mobile-container">
+    <div class="container" style="padding-bottom: 100px;">
+      <!-- Updated header with Tawakkalna-style search bar -->
+      <header style="margin-bottom: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <img src="logo.png" alt="هوية الظل" style="height: 123px; width: auto;">
+          <div style="flex: 1; position: relative;">
+            <input 
+              type="text" 
+              id="searchInput" 
+              placeholder="ابحث في السجل..."
+              onkeyup="filterActivity()"
+              style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 1rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 12px; color: var(--color-text); font-size: 0.875rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <h2 class="mb-2" style="font-size: 1.5rem; font-weight: 700;">سجل النشاط</h2>
+      <p class="text-secondary mb-4" style="font-size: 0.875rem;">مركز الشفافية - جميع طلبات الوصول إلى هويتك</p>
+
+      <!-- Redesigned filter section with Tawakkalna-style cards -->
+      <div class="grid grid-2 gap-2 mb-4">
+        <div style="background: var(--color-bg-secondary); border-radius: 16px; padding: 0.75rem; border: 1px solid var(--color-border);">
+          <select id="statusFilter" onchange="filterActivity()" style="width: 100%; background: transparent; border: none; color: var(--color-text); font-size: 0.875rem;">
+            <option value="all">جميع الحالات</option>
+            <option value="verified">تم التحقق</option>
+            <option value="rejected">مرفوض</option>
+            <option value="pending">قيد الانتظار</option>
+          </select>
+        </div>
+        
+        <div style="background: var(--color-bg-secondary); border-radius: 16px; padding: 0.75rem; border: 1px solid var(--color-border);">
+          <select id="dateFilter" onchange="filterActivity()" style="width: 100%; background: transparent; border: none; color: var(--color-text); font-size: 0.875rem;">
+            <option value="all">كل الفترات</option>
+            <option value="today">اليوم</option>
+            <option value="week">هذا الأسبوع</option>
+            <option value="month">هذا الشهر</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Activity List -->
+      <div id="activityList"></div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center" style="padding: 3rem 1rem; display: none;">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1" style="margin: 0 auto 1rem;">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <p class="text-secondary">لا توجد نتائج</p>
+      </div>
+    </div>
+
+    <!-- Updated bottom navigation like Tawakkalna -->
+    <nav style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: var(--color-card); border-top: 1px solid var(--color-border); padding: 0.75rem 1rem; z-index: 100;">
+      <div class="flex justify-between items-center" style="max-width: 350px; margin: 0 auto;">
+        <a href="profile.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span style="font-size: 0.65rem;">معلوماتي</span>
+        </a>
+        <a href="activity.html" class="flex flex-col items-center gap-1" style="color: var(--color-primary); text-decoration: none; min-width: 60px; position: relative;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span style="font-size: 0.65rem;">السجل</span>
+        </a>
+        <a href="dashboard.html" class="flex flex-col items-center gap-1" style="color: var(--color-text); text-decoration: none; min-width: 60px;">
+          <div style="width: 44px; height: 44px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -20px; box-shadow: 0 4px 15px rgba(0, 210, 106, 0.4);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <span style="font-size: 0.65rem;">الخدمات</span>
+        </a>
+        <a href="risk.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span style="font-size: 0.65rem;">واكب</span>
+        </a>
+        <a href="settings.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+          <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+            <img src="logo.png" alt="" style="width: 20px; height: 20px; object-fit: contain;">
+          </div>
+          <span style="font-size: 0.65rem;">هوية الظل</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <script src="js/activity.js"></script>
+</body>
+</html>

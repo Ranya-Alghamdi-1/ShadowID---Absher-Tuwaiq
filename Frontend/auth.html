@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - هوية الظل</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Custom auth page styles */
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(180deg, rgba(74, 124, 89, 0.1) 0%, transparent 50%);
+    }
+    
+    .logo-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .logo-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .logo-wrapper img {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 30px rgba(74, 124, 89, 0.4));
+    }
+    
+    .logo-glow {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 124, 89, 0.2) 0%, transparent 70%);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    
+    .welcome-text h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    
+    .welcome-text p {
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+    
+    .auth-card {
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #2a2a2a;
+    }
+    
+    .auth-card h3 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .auth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .auth-btn-primary {
+      background: linear-gradient(135deg, #4a7c59 0%, #3d6b4a 100%);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    
+    .auth-btn-primary:hover {
+      background: linear-gradient(135deg, #5a8c69 0%, #4a7c59 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 124, 89, 0.3);
+    }
+    
+    .auth-btn-secondary {
+      background: #252525;
+      color: #fff;
+      border: 1px solid #333;
+    }
+    
+    .auth-btn-secondary:hover {
+      background: #2a2a2a;
+      border-color: #4a7c59;
+    }
+    
+    .auth-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      gap: 1rem;
+    }
+    
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #333;
+    }
+    
+    .divider-text {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    
+    .agreement-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 1rem;
+      background: #151515;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+    }
+    
+    .agreement-section input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #4a7c59;
+      cursor: pointer;
+    }
+    
+    .agreement-section label {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    
+    .agreement-section a {
+      color: #4a7c59;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .agreement-section a:hover {
+      text-decoration: underline;
+    }
+    
+    .security-badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .badge-green {
+      background: rgba(74, 124, 89, 0.15);
+      color: #4a7c59;
+      border: 1px solid rgba(74, 124, 89, 0.3);
+    }
+    
+    .badge-cyan {
+      background: rgba(6, 182, 212, 0.15);
+      color: #06b6d4;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    
+    .badge-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    
+    .badge svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .footer-text {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .shadow-logo {
+    width: 60%;
+    max-width: 240px;
+    height: auto;
+}
+.logo-wrapper img {
+  width: 300px;
+}
+.auth-card {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+}
+
+.agreement-section {
+  background: #2e2e2e;
+}
+
+.auth-btn-secondary {
+  background: #2f2f2f;
+  border: 1px solid #3d3d3d;
+}
+
+.divider-line {
+  background: #3d3d3d;
+}
+
+.welcome-text p,
+.divider-text,
+.agreement-section label {
+  color: #c9c9c9;
+}
+
+.logo-wrapper img {
+  width: 300px;
+  filter: drop-shadow(0 0 25px rgba(74, 124, 89, 0.3));
+}
+
+.logo-glow {
+  background: radial-gradient(circle, rgba(74, 124, 89, 0.15) 0%, transparent 70%);
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+    <div class="auth-container">
+      
+      <!-- Logo Section -->
+      <div class="logo-section">
+        <div class="logo-wrapper">
+          <div class="logo-glow"></div>
+          <img src="logo.png" alt="هوية الظل">
+        </div>
+        <div class="welcome-text">
+          <h1>مرحباً بك</h1>
+          <p>سجل الدخول للوصول إلى هويتك الرقمية الآمنة</p>
+        </div>
+      </div>
+
+      <!-- Auth Card -->
+      <div class="auth-card">
+        <h3>اختر طريقة الدخول</h3>
+        
+        <button class="auth-btn auth-btn-primary" onclick="loginWithTawakkalna()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+          تسجيل الدخول عبر توكلنا
+        </button>
+
+        <button class="auth-btn auth-btn-secondary" onclick="loginWithBiometric()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 11c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"></path>
+            <path d="M2 11c0 5.52 4.48 10 10 10s10-4.48 10-10S17.52 1 12 1"></path>
+            <path d="M7 11c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5"></path>
+            <path d="M17 11c0 2.76-2.24 5-5 5"></path>
+          </svg>
+          تسجيل الدخول البيومتري
+        </button>
+
+       
+        <div class="agreement-section">
+          <input type="checkbox" id="agree">
+          <label for="agree">
+            أوافق على 
+            <a href="privacy.html">سياسة الخصوصية</a>
+            و
+            <a href="privacy.html">شروط الاستخدام</a>
+          </label>
+        </div>
+      </div>
+
+      <!-- Security Badges -->
+    
+
+      <p class="footer-text">جميع بياناتك محمية ومشفرة بأعلى معايير الأمان</p>
+
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    function loginAsGuest() {
+      const checkbox = document.getElementById('agree');
+      if (!checkbox.checked) {
+        alert('يرجى الموافقة على سياسة الخصوصية وشروط الاستخدام');
+        return;
+      }
+      sessionStorage.setItem('guestMode', 'true');
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

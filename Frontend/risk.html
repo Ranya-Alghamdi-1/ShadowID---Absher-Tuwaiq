@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك المخاطر - هوية الظل</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="container" style="padding-bottom: 100px;">
+            <!-- New header with logo -->
+            <header style="margin-bottom: 1.5rem;">
+                <div class="flex items-center justify-between">
+                    <button class="back-button" onclick="window.location.href='dashboard.html'" style="margin: 0;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"></path>
+                        </svg>
+                        رجوع
+                    </button>
+                    <img src="logo.png" alt="هوية الظل" style="height: 123px; width: auto;">
+                </div>
+            </header>
+
+            <h2 class="mb-3">محرك المخاطر AI</h2>
+            <p class="text-secondary mb-4" style="font-size: 0.875rem;">تحليل أمان هويتك الرقمية في الوقت الفعلي</p>
+
+            <!-- Risk Score -->
+            <div class="card mb-3 text-center">
+                <p class="text-secondary mb-2" style="font-size: 0.875rem;">مستوى المخاطر</p>
+                <div style="margin: 0 auto 1rem; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, rgba(0, 210, 106, 0.2), rgba(0, 198, 251, 0.2)); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <div class="animate-pulse" style="position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--color-primary); opacity: 0.3;"></div>
+                    <div style="text-align: center;">
+                        <div id="riskScore" style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary);">18</div>
+                        <div class="text-secondary" style="font-size: 0.75rem;">من 100</div>
+                    </div>
+                </div>
+                <div id="riskLevel" class="security-badge badge-green" style="font-size: 1rem;">مخاطر منخفضة</div>
+            </div>
+
+            <!-- Radar Chart -->
+            <div class="card mb-3">
+                <h3 class="mb-3">تحليل نمط النشاط</h3>
+                <svg id="radarChart" width="100%" height="280" viewBox="0 0 280 280"></svg>
+            </div>
+
+            <!-- Security Metrics -->
+            <div class="card mb-3">
+                <h3 class="mb-3">مقاييس الأمان</h3>
+                <div class="grid gap-3">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-secondary" style="font-size: 0.875rem;">تشفير البيانات</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">100%</span>
+                        </div>
+                        <div style="height: 6px; background: var(--color-border); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="height: 100%; width: 100%; background: var(--color-primary);"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-secondary" style="font-size: 0.875rem;">سلامة الاتصال</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">98%</span>
+                        </div>
+                        <div style="height: 6px; background: var(--color-border); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="height: 100%; width: 98%; background: var(--color-primary);"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-secondary" style="font-size: 0.875rem;">معدل الاستجابة</span>
+                            <span style="font-weight: 600; color: var(--color-accent-cyan);">87%</span>
+                        </div>
+                        <div style="height: 6px; background: var(--color-border); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="height: 100%; width: 87%; background: var(--color-accent-cyan);"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-secondary" style="font-size: 0.875rem;">حماية الخصوصية</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">95%</span>
+                        </div>
+                        <div style="height: 6px; background: var(--color-border); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="height: 100%; width: 95%; background: var(--color-primary);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="card">
+                <h3 class="mb-3">التنبيهات الأمنية</h3>
+                <div id="alertsList"></div>
+            </div>
+        </div>
+
+        <!-- Updated bottom navigation like Tawakkalna -->
+        <nav style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: var(--color-card); border-top: 1px solid var(--color-border); padding: 0.75rem 1rem; z-index: 100;">
+            <div class="flex justify-between items-center" style="max-width: 350px; margin: 0 auto;">
+                <a href="profile.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span style="font-size: 0.65rem;">معلوماتي</span>
+                </a>
+                <a href="activity.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span style="font-size: 0.65rem;">السجل</span>
+                </a>
+                <a href="dashboard.html" class="flex flex-col items-center gap-1" style="color: var(--color-text); text-decoration: none; min-width: 60px;">
+                    <div style="width: 44px; height: 44px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -20px; box-shadow: 0 4px 15px rgba(0, 210, 106, 0.4);">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <span style="font-size: 0.65rem;">الخدمات</span>
+                </a>
+                <a href="risk.html" class="flex flex-col items-center gap-1" style="color: var(--color-primary); text-decoration: none; min-width: 60px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span style="font-size: 0.65rem;">واكب</span>
+                </a>
+                <a href="settings.html" class="flex flex-col items-center gap-1" style="color: var(--color-text-secondary); text-decoration: none; min-width: 60px;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+                        <img src="logo.png" alt="" style="width: 20px; height: 20px; object-fit: contain;">
+                    </div>
+                    <span style="font-size: 0.65rem;">هوية الظل</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script src="js/risk.js"></script>
+</body>
+</html>
