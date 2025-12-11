@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الأمنية - وزارة الداخلية</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-gradient"></div>
+        <div class="header-decoration header-decoration-left"></div>
+        <div class="header-decoration header-decoration-right"></div>
+        
+        <div class="header-content">
+            <div class="header-logo-section">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <div class="logo-glow"></div>
+                    <div class="logo">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Title -->
+                <div class="header-title-section">
+                    <h1 class="header-title">لوحة التحكم الأمنية</h1>
+                    <p class="header-subtitle">
+                        <span class="status-indicator"></span>
+                        وزارة الداخلية - نظام المراقبة المركزي
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Notifications -->
+            <button class="notification-btn" onclick="showNotifications()">
+                <div class="notification-glow"></div>
+                <div class="notification-content">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">7</span>
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Heatmap Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <div class="icon-badge icon-badge-green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <h2>خريطة الاستخدام حسب المناطق</h2>
+                </div>
+                <div class="live-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    <span>تحديث مباشر</span>
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+            
+            <!-- Stats and Total Users -->
+            <div class="heatmap-stats">
+                <div class="stats-grid">
+                    <div class="stat-card stat-card-green">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">منطقة نشطة</div>
+                    </div>
+                    <div class="stat-card stat-card-red">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">مناطق عالية التكدس</div>
+                    </div>
+                    <div class="stat-card stat-card-orange">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">مناطق متوسطة</div>
+                    </div>
+                </div>
+                
+                <!-- Total Users -->
+                <div class="total-users-card">
+                    <div class="total-users-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="total-users-value" id="totalUsers">0</div>
+                    <div class="total-users-label">إجمالي المستخدمين</div>
+                </div>
+            </div>
+            
+            <!-- Legend -->
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-circle legend-circle-red"></div>
+                    <span>عالي جداً (+80%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-circle legend-circle-orange"></div>
+                    <span>عالي (60-80%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-circle legend-circle-yellow"></div>
+                    <span>متوسط (40-60%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-circle legend-circle-green"></div>
+                    <span>منخفض (-40%)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <div class="icon-badge icon-badge-orange">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <h2>التنبيهات الأمنية</h2>
+                </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="devices" onclick="switchTab('devices')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>هويات متعددة</span>
+                    <span class="tab-badge" id="devicesCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="locations" onclick="switchTab('locations')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>مناطق متعددة</span>
+                    <span class="tab-badge" id="locationsCount">0</span>
+                </button>
+            </div>
+            
+            <!-- Risk Filter -->
+            <div class="risk-filter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                </svg>
+                <span>تصنيف الخطورة:</span>
+                <button class="filter-btn active" data-filter="all" onclick="filterAlerts('all')">الكل</button>
+                <button class="filter-btn filter-btn-critical" data-filter="حرج" onclick="filterAlerts('حرج')">حرج</button>
+                <button class="filter-btn filter-btn-high" data-filter="عالي" onclick="filterAlerts('عالي')">عالي</button>
+                <button class="filter-btn filter-btn-medium" data-filter="متوسط" onclick="filterAlerts('متوسط')">متوسط</button>
+            </div>
+            
+            <!-- Alerts Content -->
+            <div class="alerts-content" id="alertsContent">
+                <!-- Alerts will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- AI Analysis Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <div class="icon-badge icon-badge-green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                            <path d="M8.5 8.5v.01"/>
+                            <path d="M16 15.5v.01"/>
+                            <path d="M12 12v.01"/>
+                            <path d="M11 17v.01"/>
+                            <path d="M7 14v.01"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>التقرير الشامل</h2>
+                        <p class="section-subtitle">تقرير تفصيلي عن الوضع في المملكة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Date and Generate Button -->
+            <div class="report-controls">
+                <div class="date-input-container">
+                    <label for="reportDate">اختر التاريخ</label>
+                    <div class="date-input-wrapper">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <input type="date" id="reportDate" value="">
+                    </div>
+                </div>
+                <button class="generate-btn" id="generateBtn" onclick="generateReport()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <span>إنشاء التقرير</span>
+                </button>
+            </div>
+            
+            <!-- Report Area -->
+            <div class="report-area" id="reportArea">
+                <div class="report-placeholder" id="reportPlaceholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <p>اختر التاريخ والوقت ثم اضغط على "إنشاء التقرير" للحصول على تحليل شامل</p>
+                </div>
+                
+                <div class="report-loading" id="reportLoading" style="display: none;">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1C8354" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                            <path d="M8.5 8.5v.01"/>
+                            <path d="M16 15.5v.01"/>
+                            <path d="M12 12v.01"/>
+                            <path d="M11 17v.01"/>
+                            <path d="M7 14v.01"/>
+                        </svg>
+                    </div>
+                    <p class="loading-text">جاري تحليل البيانات وإعداد التقرير...</p>
+                    <p class="loading-subtext">يتم جمع المعلومات من جميع المناطق</p>
+                </div>
+                
+                <div class="report-content" id="reportContent" style="display: none;">
+                    <!-- Report will be inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
