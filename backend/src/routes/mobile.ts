@@ -8,6 +8,7 @@ import {
   getUserController,
   getRiskController,
   getSessionController,
+  getServiceController,
 } from "../controllers";
 
 const router = express.Router();
@@ -76,6 +77,11 @@ router.get("/shadowid/:token/details", mobileAuth, async (req, res) => {
 
 router.post("/shadowid/scan", async (req, res) => {
   await getShadowIdController().scan(req, res);
+});
+
+// ==================== SERVICE ROUTES ====================
+router.get("/services", async (req, res) => {
+  await getServiceController().getServicesWithPortals(req, res);
 });
 
 // ==================== ACTIVITY ROUTES ====================

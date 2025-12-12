@@ -9,6 +9,7 @@ import { AlertController } from "./AlertController";
 import { AdminUserController } from "./AdminUserController";
 import { ReportController } from "./ReportController";
 import { SeedController } from "./SeedController";
+import { ServiceController } from "./ServiceController";
 import { AppDataSource } from "../database";
 
 /**
@@ -57,4 +58,8 @@ export function getReportController(): ReportController {
 
 export function getSeedController(): SeedController {
   return new SeedController(AppDataSource);
+}
+
+export function getServiceController(): ServiceController {
+  return new ServiceController(AppDataSource);
 }

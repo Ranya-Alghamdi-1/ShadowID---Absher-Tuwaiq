@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>هوية الظل - ماسح QR</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        .scanner-container {
+            padding: 1rem;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .service-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .service-card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .service-card:hover {
+            background: var(--color-card-hover);
+            border-color: var(--color-primary);
+        }
+
+        .service-card.selected {
+            border-color: var(--color-primary);
+            background: rgba(0, 210, 106, 0.1);
+        }
+
+        .service-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .service-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .portals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .portal-item {
+            padding: 0.75rem;
+            background: rgba(0, 210, 106, 0.05);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .portal-item:hover {
+            background: rgba(0, 210, 106, 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .portal-item.selected {
+            background: rgba(0, 210, 106, 0.15);
+            border-color: var(--color-primary);
+        }
+
+        .portal-name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .portal-location {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .scanner-view {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scanner-view.active {
+            display: flex;
+        }
+
+        #qr-reader {
+            width: 100%;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--color-card);
+            border: 2px solid var(--color-primary);
+        }
+
+        .scanner-info {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .selected-service-info {
+            background: rgba(0, 210, 106, 0.1);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius);
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--color-card);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-card-hover);
+        }
+
+        .result-card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .result-success {
+            border-color: var(--color-primary);
+            background: rgba(0, 210, 106, 0.1);
+        }
+
+        .result-error {
+            border-color: var(--color-accent-red);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .result-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: var(--color-text-secondary);
+        }
+
+        .result-value {
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-text-secondary);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mobile-container">
+        <div class="scanner-container">
+            <!-- Back Button -->
+            <button class="back-btn" onclick="goBack()" title="رجوع">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+
+            <!-- Service Selection View -->
+            <div id="serviceSelectionView">
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">اختر الخدمة والفرع</h2>
+                <div id="servicesList" class="service-list">
+                    <div class="loading">جاري تحميل الخدمات...</div>
+                </div>
+            </div>
+
+            <!-- Scanner View -->
+            <div id="scannerView" class="scanner-view">
+                <div class="selected-service-info" id="selectedServiceInfo"></div>
+                <div id="qr-reader"></div>
+                <div class="scanner-info">
+                    <p>وجه الكاميرا نحو رمز QR</p>
+                </div>
+                <button class="btn btn-secondary" onclick="stopScanner()">إلغاء</button>
+            </div>
+
+            <!-- Result View -->
+            <div id="resultView" style="display: none;">
+                <div id="resultCard" class="result-card">
+                    <div class="result-title" id="resultTitle"></div>
+                    <div class="result-details" id="resultDetails"></div>
+                </div>
+                <button class="btn btn-primary" onclick="resetScanner()" style="margin-top: 1rem;">
+                    مسح آخر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Js/scanner.js"></script>
+</body>
+
+</html>
