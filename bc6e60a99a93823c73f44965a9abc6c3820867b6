@@ -1,0 +1,170 @@
+backend/src/scripts/seed-users.ts
+  d51812d9ecec0c87 1-225,227-240
+backend/src/database.ts
+  d51812d9ecec0c87 1-40
+Frontend/styles/main.css
+  d51812d9ecec0c87 174-183
+backend/src/routes/admin.ts
+  d51812d9ecec0c87 1-9,16,21-35,37-38,40-41,43-44,46-47,50,55,60,69,72,76-78,81-83,85,90-129
+backend/src/services/ServiceService.ts
+  d51812d9ecec0c87 1-226
+backend/src/controllers/ShadowIdController.ts
+  d51812d9ecec0c87 1-569
+backend/src/controllers/SessionController.ts
+  d51812d9ecec0c87 1-331
+backend/src/middleware/auth.ts
+  d51812d9ecec0c87 2,4-14,16-39,41-51,53-60,62-66
+Frontend/profile.html
+  d51812d9ecec0c87 3,10,41,53,111,119,125,136,139,143-144,146,148,152-153,155,157,161-162,164,221,224
+Frontend/Js/auth-utils.js
+  d51812d9ecec0c87 1-243
+backend/src/controllers/AlertController.ts
+  d51812d9ecec0c87 1-429
+Frontend/activity.html
+  d51812d9ecec0c87 123
+backend/src/controllers/DashboardController.ts
+  d51812d9ecec0c87 1-266
+backend/package.json
+  d51812d9ecec0c87 1-41
+backend/src/public/oauth-tawakkalna.html
+  d51812d9ecec0c87 1-121,123-126,128-130,132-163,165-168,170-314
+Frontend/Js/id-details.js
+  d51812d9ecec0c87 1-3,6-7,10-16,18-19,21,23-26,28-33,36-38,41-49,53-66,70,76,79-80,82-88,93,101,103,107,114-115,117-125,127-138,142-143,145-146
+Frontend/sessions.html
+  d51812d9ecec0c87 1-23,26-35
+backend/src/entities/Activity.ts
+  d51812d9ecec0c87 1,30,32-33
+backend/src/controllers/AdminUserController.ts
+  d51812d9ecec0c87 1-155
+backend/ml/assess_risk.py
+  d51812d9ecec0c87 1-399
+backend/src/controllers/ReportController.ts
+  d51812d9ecec0c87 1-439
+backend/src/entities/User.ts
+  d51812d9ecec0c87 29-34
+backend/src/services/RiskAssessmentService.ts
+  d51812d9ecec0c87 1-229,231-232,234-264,266-296,298-343,345-347,349-356,358-393
+Frontend/Js/dashboard.js
+  d51812d9ecec0c87 7-13,17-22,24,26-29,31-33,35-36,41-54,57-64,67-70,88-99,102-106,109-110,120-129,131-134,136-138,140-146,148-163,171-173,175,177,179-185,188-190,192-193,196
+backend/src/controllers/index.ts
+  d51812d9ecec0c87 1-60
+Frontend/Js/sessions.js
+  d51812d9ecec0c87 1-78,80-85,87-109,111,113-224,226-269
+backend/src/services/UserService.ts
+  d51812d9ecec0c87 1-110
+Frontend/settings.html
+  d51812d9ecec0c87 99,119-138,279
+backend/src/entities/Service.ts
+  d51812d9ecec0c87 1-45
+backend/src/scripts/seed-all.ts
+  d51812d9ecec0c87 1-33
+backend/ml/generate_rag_report.py
+  d51812d9ecec0c87 1-15,18-28,30-32,34-37,39-50,52-54,56-61,63-64,66-67,69-76,78-86,88,90,92-99,101,103-106,108-110,112-113,115-117,119-120,122-123,125-128,130-135,137-138,140-142,144-145,147-148,150-157,159-161,164,166-170,172-174,176-177,179-187,189-190,192-193,195-196,198-201,203-205,207-210,212-214,216-217,219-220
+Frontend/id-details.html
+  d51812d9ecec0c87 92
+backend/src/controllers/RiskController.ts
+  d51812d9ecec0c87 1-337
+backend/src/controllers/AuthController.ts
+  d51812d9ecec0c87 1-30,32-354
+backend/src/controllers/UserController.ts
+  d51812d9ecec0c87 1-359
+backend/ml/requirements.txt
+  d51812d9ecec0c87 1-13
+backend/src/scripts/README.md
+  d51812d9ecec0c87 1-104
+backend/src/entities/ShadowId.ts
+  d51812d9ecec0c87 1-49
+backend/src/app.ts
+  d51812d9ecec0c87 1,4-7,9-17,19-57
+backend/src/entities/ServicePortal.ts
+  d51812d9ecec0c87 1-42
+backend/src/controllers/SeedController.ts
+  d51812d9ecec0c87 1-42
+backend/src/routes/mobile.ts
+  d51812d9ecec0c87 4,12-17,20-25,28-30,32,34,36-40,42-43,46-51,54-55,63-64,68,71-72,75-76,80,85,88-89,94,97-98,102,106,110,114-115,118-119,128-130
+Frontend/Js/profile.js
+  d51812d9ecec0c87 1-3,5-10,12,14-15,17-25,27,29-34,36-61,66-81,83-85,89-91
+Frontend/Js/auth.js
+  d51812d9ecec0c87 1,4,7-8,11-13,15-18,21-24
+backend/ml/RAG_README.md
+  d51812d9ecec0c87 1-23,25-40,42-46,48-64,66-85,87-101,103-108,110-150,152-158,160-168,170-178,180-185,187-190,192-204,206-210,212-216,218-224,226-231,233-238,240-250
+backend/src/scripts/seed-services.ts
+  d51812d9ecec0c87 1-383,385-398
+Frontend/Js/risk.js
+  d51812d9ecec0c87 1,11-21,24-28,122,131-139,146,163-198,210-225,231-233,236-238,240-276,281-282,284-286,291-297,299-301
+  8acbeffa6ae2126f 199-207,226-230,239,277-280,287-290
+backend/src/services/DeviceService.ts
+  d51812d9ecec0c87 1-241
+backend/src/services/ActivityService.ts
+  d51812d9ecec0c87 1-20,22-23,25-30,32-172
+backend/src/services/ShadowIdService.ts
+  d51812d9ecec0c87 1-82,84,86-249
+backend/src/entities/Session.ts
+  d51812d9ecec0c87 1-51
+Frontend/risk.html
+  d51812d9ecec0c87 57,61,66,74,78,86,91,99,103,184
+  8acbeffa6ae2126f 40,107-117
+backend/ml/README.md
+  d51812d9ecec0c87 1-27,29-35,37-50
+Frontend/Js/activity.js
+  d51812d9ecec0c87 14-48,52-58,60-76,78,80-82,102-110,160,188-221,223,226-228,230-232
+Frontend/auth.html
+  d51812d9ecec0c87 328
+Frontend/dashboard.html
+  d51812d9ecec0c87 204,329-331,384,408-409
+backend/src/controllers/ActivityController.ts
+  d51812d9ecec0c87 1-115
+Frontend/Js/settings.js
+  d51812d9ecec0c87 1-6,8,10-11,13-15,17-28,30-34,37,40-51,53,55-56,58,62-65,67,71-72,74-75,84-93,95-108,110-112,114-121,125-128
+backend/src/entities/SecurityAlert.ts
+  d51812d9ecec0c87 1-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.22",
+  "base_commit_sha": "bc6e60a99a93823c73f44965a9abc6c3820867b6",
+  "prompts": {
+    "8acbeffa6ae2126f": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc52e086-8452-412a-989f-3a0e4d54936a",
+        "model": "default"
+      },
+      "human_author": "ahmedrowaihi <ahmedrowaihi1@gmail.com>",
+      "messages": [
+        {
+          "type": "user",
+          "text": "why page of محرك المخاطر AI\nalways shows 18 ?\n\nfrom where that number is comming ?",
+          "timestamp": "2025-12-12T06:35:26.899Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Searching the codebase for \"محرك المخاطر\" and \"18\" to locate the source.",
+          "timestamp": "2025-12-12T06:35:37.183Z"
+        },
+        {
+          "type": "assistant",
+          "text": "Found a hardcoded \"18\" in `risk.html`. Checking the JavaScript that should load the actual risk score:",
+          "timestamp": "2025-12-12T06:35:44.257Z"
+        }
+      ],
+      "total_additions": 92,
+      "total_deletions": 68,
+      "accepted_lines": 40,
+      "overriden_lines": 0
+    },
+    "d51812d9ecec0c87": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a1a1f84b-a829-472e-b19a-219640656cb1",
+        "model": "default"
+      },
+      "human_author": "ahmedrowaihi <ahmedrowaihi1@gmail.com>",
+      "messages": [],
+      "total_additions": 16975,
+      "total_deletions": 4119,
+      "accepted_lines": 11878,
+      "overriden_lines": 109
+    }
+  }
+}
