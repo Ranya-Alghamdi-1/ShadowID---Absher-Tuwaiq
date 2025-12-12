@@ -34,7 +34,7 @@ A specialized dashboard for MOI (Ministry of Interior) and administrators to mon
 Contains the trained models used for risk assessment and anomaly detection.
 * **`Dataset/`**: Data used for training and validation.
 * **`Models/`**: Saved trained models (Autoencoder & RandomForest).
-* **`DeepLearning&Classification_Source.py`**: Source code for the training pipeline and classification logic.
+* **`DeepLearning&Classification_Source.py`**: Source code for the training pipeline and classification logic using nueral networks.
 
 ### 4. ⚙️ Backend API (`/backend`)
 The core logic engine built with **Express.js** and **TypeScript**.
