@@ -1,0 +1,47 @@
+# Backend Dockerfile - Node.js + TypeScript + Python for ML
+FROM node:18-slim
+
+# Install Python 3 and system dependencies for ML libraries
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY backend/package*.json ./
+
+# Install Node.js dependencies
+RUN npm install
+
+# Copy Python requirements
+COPY backend/ml/requirements.txt ./ml/
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r ml/requirements.txt
+
+# Copy backend source code
+COPY backend/ ./
+
+# Copy ML models directory (for assess_risk.py - expects ../../DeepLearning_Classification/Models from ml/)
+# From /app/ml/, ../../DeepLearning_Classification/Models = /DeepLearning_Classification/Models
+COPY DeepLearning_Classification/ /DeepLearning_Classification/
+
+# Copy frontend directories (for serving static files)
+# From /app/dist/, ../../Frontend = /Frontend
+COPY Frontend/ /Frontend/
+# Copy dashboard directory
+COPY Dashboard-idntity/ /Dashboard-idntity/
+
+# Build TypeScript
+RUN npm run build
+
+# Expose port
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]

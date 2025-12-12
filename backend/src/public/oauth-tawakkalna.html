@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - توكلنا</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(74, 124, 89, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            background: #1a1a1a;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #4a7c59 0%, #3d6b4a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(74, 124, 89, 0.4);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .account-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .account-card {
+            background: #242424;
+            border: 1px solid #3a3a3a;
+            border-radius: 14px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .account-card:hover {
+            border-color: #4a7c59;
+            background: rgba(74, 124, 89, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 124, 89, 0.3);
+        }
+
+        .account-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .account-id {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .loading {
+            display: none;
+            color: #4a7c59;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+
+            0%,
+            20% {
+                content: '.';
+            }
+
+            40% {
+                content: '..';
+            }
+
+            60%,
+            100% {
+                content: '...';
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo">ت</div>
+            <h1>تسجيل الدخول</h1>
+            <p class="subtitle">اختر حسابك للدخول إلى ShadowID</p>
+        </div>
+
+        <div class="account-list" id="accountList">
+            <!-- Accounts will be loaded here -->
+        </div>
+
+        <div class="loading" id="loading">جاري تسجيل الدخول</div>
+    </div>
+
+    <!-- Load ThumbmarkJS for device fingerprinting -->
+    <script src="/mobile/Js/thumbmark.umd.js"></script>
+    <script>
+        // Get redirect_uri from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUri = urlParams.get('redirect_uri') || '/mobile/dashboard.html';
+
+        // Fetch accounts from database
+        const accountList = document.getElementById('accountList');
+
+        async function loadAccounts() {
+            try {
+                const response = await fetch('/api/mobile/auth/accounts');
+                const data = await response.json();
+
+                if (data.success && data.accounts && data.accounts.length > 0) {
+                    // Render accounts from database (using masked display values)
+                    data.accounts.forEach(account => {
+                        const card = document.createElement('div');
+                        card.className = 'account-card';
+                        card.innerHTML = `
+                            <div class="account-name">${account.name}</div>
+                            <div class="account-id">${account.nationalIdDisplay || account.nationalId}</div>
+                        `;
+                        // Use real values for login (nationalId and phone are real, display values are masked)
+                        card.addEventListener('click', () => login(account));
+                        accountList.appendChild(card);
+                    });
+                } else {
+                    // Fallback to empty state
+                    accountList.innerHTML = '<div style="color: #9ca3af; padding: 20px; text-align: center;">لا توجد حسابات متاحة</div>';
+                }
+            } catch (error) {
+                console.error('Failed to load accounts:', error);
+                // Fallback to empty state
+                accountList.innerHTML = '<div style="color: #9ca3af; padding: 20px; text-align: center;">فشل تحميل الحسابات</div>';
+            }
+        }
+
+        // Load accounts on page load
+        loadAccounts();
+
+        // Get user location (browser geolocation)
+        async function getLocation() {
+            return new Promise((resolve) => {
+                if (!navigator.geolocation) {
+                    resolve(null);
+                    return;
+                }
+
+                // Timeout after 3 seconds
+                const timeout = setTimeout(() => {
+                    resolve(null);
+                }, 3000);
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        clearTimeout(timeout);
+                        const { latitude, longitude } = position.coords;
+                        // Format as "Lat,Long" for backend to reverse geocode
+                        resolve(`${latitude},${longitude}`);
+                    },
+                    (error) => {
+                        clearTimeout(timeout);
+                        console.warn('Geolocation error:', error.message);
+                        resolve(null);
+                    },
+                    {
+                        enableHighAccuracy: false,
+                        timeout: 3000,
+                        maximumAge: 60000 // Accept cached location up to 1 minute old
+                    }
+                );
+            });
+        }
+
+        async function login(account) {
+            const loading = document.getElementById('loading');
+            const accountList = document.getElementById('accountList');
+
+            loading.classList.add('active');
+            accountList.style.opacity = '0.5';
+            accountList.style.pointerEvents = 'none';
+
+            try {
+                // Get device fingerprint using ThumbmarkJS
+                let thumbmark = null;
+                let fingerprintData = {
+                    screenInfo: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    language: navigator.language,
+                    platform: navigator.platform,
+                };
+
+                // Get location (required)
+                const location = await getLocation();
+                if (location) {
+                    fingerprintData.location = location;
+                }
+
+                try {
+                    // Try to get ThumbmarkJS fingerprint
+                    if (typeof ThumbmarkJS !== 'undefined' && ThumbmarkJS.Thumbmark) {
+                        const tm = new ThumbmarkJS.Thumbmark({
+                            timeout: 3000,
+                            logging: false
+                        });
+                        const result = await tm.get();
+                        if (result && result.thumbmark) {
+                            thumbmark = result.thumbmark;
+                            fingerprintData.thumbmark = thumbmark;
+                            // Only send thumbmark, not components (saves bandwidth)
+                        }
+                    }
+                } catch (fingerprintError) {
+                    console.warn('ThumbmarkJS failed, using fallback:', fingerprintError);
+                    // Fallback to simple fingerprint if ThumbmarkJS fails
+                }
+
+                // Call callback endpoint with fingerprint data
+                const response = await fetch('/api/mobile/auth/tawakkalna/callback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        nationalId: account.nationalId,
+                        name: account.name,
+                        phone: account.phone,
+                        redirectUri: redirectUri,
+                        fingerprintData: fingerprintData,
+                        personType: account.personType,
+                        nationality: account.nationality
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Redirect back to app
+                    window.location.href = redirectUri;
+                } else {
+                    alert('فشل تسجيل الدخول');
+                    loading.classList.remove('active');
+                    accountList.style.opacity = '1';
+                    accountList.style.pointerEvents = 'auto';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('حدث خطأ أثناء تسجيل الدخول');
+                loading.classList.remove('active');
+                accountList.style.opacity = '1';
+                accountList.style.pointerEvents = 'auto';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: shadowid-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      # Set to "false" to disable LLM features (recommendations, RAG reports)
+      # When disabled, the LLM volume is not needed and saves ~4GB disk space
+      - ENABLE_LLM_RECOMMENDATIONS=${ENABLE_LLM_RECOMMENDATIONS:-true}
+    volumes:
+      # SQLite database volume (named volume for persistence)
+      - database:/app/data
+      # LLM models cache volume (HuggingFace cache - named volume for persistence)
+      # Comment out the line below to disable LLM features and save disk space
+      - llm_model:/root/.cache/huggingface
+      # ML models directory (for assess_risk.py - expects ../../DeepLearning_Classification/Models from /app/ml/)
+      # From /app/ml/, ../../DeepLearning_Classification/Models = /DeepLearning_Classification/Models
+      # Mount as volume for easy updates without rebuilding
+      - ./DeepLearning_Classification/Models:/DeepLearning_Classification/Models:ro
+      # Frontend files (optional: mount for development, otherwise use copied files from image)
+      # Uncomment below for live editing during development:
+      # - ./Frontend:/Frontend:ro
+      # - ./Dashboard-idntity:/Dashboard-idntity:ro
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3000/', (r) => {process.exit(r.statusCode === 200 || r.statusCode === 302 ? 0 : 1)})",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  # Named volume for SQLite database
+  database:
+    driver: local
+  # Named volume for LLM models (HuggingFace cache)
+  llm_model:
+    driver: local
