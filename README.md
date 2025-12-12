@@ -167,5 +167,5 @@ Models are located in `DeepLearning_Classification/Models/`
 - **Shahad bin judia** – [LinkedIn](https://www.linkedin.com/in/shahad-bin-judia-bb7b39325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)  
 - **Bushra Abu Fayyah** – [LinkedIn](https://www.linkedin.com/in/ahmed-rowaihi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 - **Mohammed Alliheedi** – [LinkedIn](https://www.linkedin.com/in/mohammed-alliheedi-ph-d-41262316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
-- **Abrar** – [LinkedIn]()
+- **Abrar** – [LinkedIn](https://www.linkedin.com/in/abrar-al?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 - **Ahmed Al Rowaihi** – [LinkedIn](https://www.linkedin.com/in/ahmed-rowaihi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
