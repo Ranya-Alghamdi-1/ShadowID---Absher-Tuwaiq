@@ -4,7 +4,7 @@ A secure, temporary identity system for Saudi Arabia that allows citizens to gen
 
 # To use the system "ShadowID"
 - **For the usesrs** – [ClickHere](https://shadow-id.sudorw.com) 
-- **For Admins** – [ClickHere]([https://shadow-id.sudorw.co](https://shadow-id.sudorw.com/admin)m) 
+- **For Admins** – [ClickHere](https://shadow-id.sudorw.com/admin) 
 
 ## 🎯 Project Overview
 
