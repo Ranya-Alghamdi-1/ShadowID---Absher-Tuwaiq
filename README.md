@@ -1,10 +1,52 @@
-# ShadowID - Absher Tuwaiq
+# ShadowID - Absher Tuwaiq (أبشر طويق)
 
-A secure, temporary identity system for Saudi Arabia that allows citizens to generate time-limited Shadow IDs for service verification without exposing their National ID.
+A secure, temporary identity system for Saudi Arabia that allows citizens to generate time-limited "Shadow IDs" for service verification without exposing their sensitive National ID data.
 
-# To use the system "ShadowID"
-- **For the usesrs** – [ClickHere](https://shadow-id.sudorw.com) 
-- **For Admins** – [ClickHere](https://shadow-id.sudorw.com/admin) 
+> **Hackathon Project:** Absher Tuwaiq - Team Basmah (فريق بصمة)
+
+## 🔗 Quick Links
+- **For Users (Mobile App):** [https://shadow-id.sudorw.com](https://shadow-id.sudorw.com)
+- **For Admins (Dashboard):** [https://shadow-id.sudorw.com/admin](https://shadow-id.sudorw.com/admin)
+
+---
+
+## 📂 Project Structure & Architecture
+
+This project is organized into four main modules: Backend, Mobile Frontend, Admin Dashboard, and AI/ML Core.
+
+### 1. 📱 Mobile Frontend (`/Frontend`)
+The user-facing web application designed for mobile view. It handles user authentication, ID generation, and history tracking.
+* **Core Pages:**
+  * `auth.html`: User login and authentication interface.
+  * `dashboard.html`: Main landing page showing current status.
+  * `id-details.html`: Displays the active "Shadow ID" and QR code.
+  * `activity.html`: Log of previous ID usages and locations.
+  * `scanner.html`: Interface for verifying IDs (for service providers).
+  * `settings.html`: User profile and preferences.
+* **Assets:** Contains `js/`, `styles/`, and `logo.png`.
+
+### 2. 📊 Admin & Analytics Dashboard (`/Dashboard-idntity`)
+A specialized dashboard for MOI (Ministry of Interior) and administrators to monitor risks and analyze data using LLMs.
+* **`RAG_ShadowID_MOI.ipynb`**: Jupyter Notebook containing the **RAG (Retrieval-Augmented Generation)** logic for generating security reports using LLMs.
+* **Web Interface:** `index.html`, `app.js`, `styles.css` for the admin visualization panel.
+
+### 3. 🧠 AI & Machine Learning (`/DeepLearning_Classification`)
+Contains the trained models used for risk assessment and anomaly detection.
+* **`Dataset/`**: Data used for training and validation.
+* **`Models/`**: Saved trained models (Autoencoder & RandomForest).
+* **`DeepLearning&Classification_Source.py`**: Source code for the training pipeline and classification logic.
+
+### 4. ⚙️ Backend API (`/backend`)
+The core logic engine built with **Express.js** and **TypeScript**.
+* **`src/`**: Application source code (Controllers, Routes, Services).
+* **`ml/`**: Python integration scripts bridging Node.js with the AI models.
+* **`data/`**: SQLite database files.
+* **Infrastructure:** `Dockerfile.backend`, `docker-compose.yml` for containerization.
+
+### 5. 📄 Documentation & Presentation (`/Presentation`)
+* Contains the hackathon presentation deck: `......هاكاثون أبشر طويق - فريق بصمة`.
+
+---
 
 ## 🎯 Project Overview
 
@@ -18,8 +60,7 @@ ShadowID enables citizens to:
 ## 🚀 Quick Start
 
 ### Option 1: Docker (Recommended)
-
-The easiest way to run the entire project with all dependencies:
+Run the entire stack (Backend, Frontend, AI Services) with one command:
 
 ```bash
 # Start all services
@@ -27,139 +68,6 @@ docker-compose up -d
 
 # View logs
 docker-compose logs -f
-
-# Stop services
-docker-compose down
-```
-
-The server will be available at `http://localhost:3000`
-
-- **Mobile App**: `http://localhost:3000/mobile`
-- **Admin Dashboard**: `http://localhost:3000/admin`
-- **API**: `http://localhost:3000/api`
-
-**Note**: On first run, LLM models will be downloaded (~3-4GB). To disable LLM features and save space, see [DOCKER_README.md](./DOCKER_README.md).
-
-### Option 2: Local Development
-
-#### Prerequisites
-
-- Node.js 18+ and npm
-- TypeScript
-- Python 3.8+ (for ML scripts)
-
-#### Installation
-
-```bash
-cd backend
-npm install
-
-# Install Python ML dependencies
-pip3 install -r ml/requirements.txt
-```
-
-#### Database Setup
-
-The SQLite database will be automatically created on first run. To seed initial services:
-
-```bash
-npm run seed:services
-```
-
-#### Run Development Server
-
-```bash
-npm run dev
-```
-
-The server will start on `http://localhost:3000`
-
-## 📁 Project Structure
-
-```
-ShadowID---Absher-Tuwaiq/
-├── backend/              # Express.js + TypeScript backend
-│   ├── src/
-│   │   ├── entities/    # TypeORM entities
-│   │   ├── routes/      # API routes
-│   │   ├── services/    # Business logic
-│   │   └── scripts/     # Seed scripts
-│   └── data/            # SQLite database
-├── Frontend/            # Mobile frontend (HTML/CSS/JS)
-├── Dashboard-idntity/   # Admin dashboard
-└── DeepLearning_Classification/  # ML models
-```
-
-## 📚 Documentation
-
-- **[DOCUMENTATION.md](./DOCUMENTATION.md)** - Complete technical documentation including:
-  - Current status and progress
-  - Architecture and database schema
-  - All API endpoints
-  - QR scanning API documentation
-  - Next steps and implementation priorities
-  - ML integration strategy
-- **[DOCKER_README.md](./DOCKER_README.md)** - Docker setup guide including:
-  - Docker Compose configuration
-  - Volume management
-  - LLM feature toggling
-  - Troubleshooting
-
-## 🔑 Key Features
-
-### ✅ Implemented
-
-- **Session-based Authentication** (30 days for mobile, 30 min for admin)
-- **Shadow ID Generation** with database persistence
-- **QR Code Scanning** with service/portal validation
-- **Activity Logging** (automatic on generation & scan)
-- **Service Registry** with portal-based location tracking
-- **Frontend Integration** with real-time data
-
-### 🚧 In Progress
-
-- ML Integration for risk assessment
-- User profile and settings management
-- Device management
-- Admin dashboard APIs
-
-## 🔐 Service Registration
-
-External services must be registered before they can scan QR codes. Each service has:
-
-- **API Key** for authentication
-- **Portals** (branches/locations) with unique portal IDs
-- **Location tracking** automatically determined from portal (prevents spoofing)
-
-See [QR_SCAN_API.md](./QR_SCAN_API.md) for integration details.
-
-## 🧠 ML Models
-
-The project includes trained ML models for risk assessment:
-
-- Autoencoder for feature extraction
-- RandomForest classifier for risk classification
-- Accuracy: 97.88%
-- LLM-powered RAG reports (Qwen2.5-1.5B-Instruct)
-- AI-generated security recommendations
-
-Models are located in `DeepLearning_Classification/Models/`
-
-**Note**: LLM features can be disabled to save disk space (~4GB). See [DOCKER_README.md](./DOCKER_README.md) for details.
-
-## 🛠️ Tech Stack
-
-- **Backend**: Express.js + TypeScript
-- **Database**: TypeORM + SQLite
-- **Authentication**: express-session (cookie-based)
-- **Frontend**: HTML5/CSS3/JavaScript
-- **ML**: Python (Keras, scikit-learn, Transformers)
-- **LLM**: Qwen2.5-1.5B-Instruct, Sentence Transformers
-- **Deployment**: Docker & Docker Compose
-
-## 📝 License
-
-[Add your license here]
 
 ## 👥 Contributors
 
