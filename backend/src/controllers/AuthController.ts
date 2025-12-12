@@ -14,12 +14,8 @@ export class AuthController {
    */
   initiateOAuth(req: Request, res: Response): void {
     const redirectUri =
-      (req.query.redirect_uri as string) || "/mobile/dashboard.html";
-    res.redirect(
-      `/oauth/oauth-tawakkalna.html?redirect_uri=${encodeURIComponent(
-        redirectUri
-      )}`
-    );
+      (req.query.redirect_uri as string) || "/mobile/dashboard";
+    res.redirect(`/oauth?redirect_uri=${encodeURIComponent(redirectUri)}`);
   }
 
   /**
@@ -217,7 +213,7 @@ export class AuthController {
           name: user.name,
           phone: user.phone,
         },
-        redirectUri: redirectUri || "/mobile/dashboard.html",
+        redirectUri: redirectUri || "/mobile/dashboard",
       });
     } catch (error) {
       console.error("Error in OAuth callback:", error);

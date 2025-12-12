@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تفاصيل الهوية - هوية الظل</title>
   <link rel="stylesheet" href="styles/main.css">
 </head>
+
 <body>
   <div class="mobile-container">
     <div class="container">
-      <button class="back-button" onclick="window.location.href='dashboard.html'">
+      <button class="back-button" onclick="window.location.href='/mobile/dashboard'">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 18l-6-6 6-6"></path>
         </svg>
@@ -20,7 +22,8 @@
 
       <!-- Full Screen QR Code -->
       <div class="card mb-3" style="text-align: center;">
-        <div style="margin: 0 auto; width: 280px; height: 280px; background: white; border-radius: 1.5rem; padding: 1rem;">
+        <div
+          style="margin: 0 auto; width: 280px; height: 280px; background: white; border-radius: 1.5rem; padding: 1rem;">
           <canvas id="qrCanvas" width="280" height="280"></canvas>
         </div>
       </div>
@@ -28,10 +31,11 @@
       <!-- Token Info -->
       <div class="card mb-3">
         <h3 class="mb-3">معلومات الرمز</h3>
-        
+
         <div class="mb-3">
           <p class="text-secondary" style="font-size: 0.875rem; margin-bottom: 0.5rem;">الرمز</p>
-          <p id="tokenDisplay" style="font-size: 1.5rem; font-weight: 600; letter-spacing: 2px; font-family: monospace;">--------</p>
+          <p id="tokenDisplay"
+            style="font-size: 1.5rem; font-weight: 600; letter-spacing: 2px; font-family: monospace;">--------</p>
         </div>
 
         <div class="grid grid-2 gap-2 mb-3">
@@ -77,7 +81,8 @@
           مشاركة مع خدمة معتمدة
         </button>
 
-        <button class="btn btn-secondary btn-full" onclick="revokeID()" style="color: var(--color-accent-red); border-color: var(--color-accent-red);">
+        <button class="btn btn-secondary btn-full" onclick="revokeID()"
+          style="color: var(--color-accent-red); border-color: var(--color-accent-red);">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="15" y1="9" x2="9" y2="15"></line>
@@ -93,4 +98,5 @@
   <script src="js/qr-generator.js"></script>
   <script src="js/id-details.js"></script>
 </body>
+
 </html>

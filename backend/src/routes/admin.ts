@@ -1,12 +1,14 @@
 import express from "express";
 import session from "express-session";
+import fs from "fs";
 import {
-  getDashboardController,
-  getAlertController,
   getAdminUserController,
+  getAlertController,
+  getDashboardController,
   getReportController,
   getSeedController,
 } from "../controllers";
+import { AppDataSource } from "../database";
 
 const router = express.Router();
 
@@ -125,6 +127,30 @@ router.post("/reports/generate", adminAuth, async (req, res) => {
 // ==================== SEED ROUTES ====================
 router.get("/seed/run", adminAuth, async (req, res) => {
   await getSeedController().runSeeds(req, res);
+});
+
+// ==================== DATABASE ROUTES ====================
+router.get("/database/download", adminAuth, (req, res) => {
+  // Get database path from DataSource configuration
+  const dbPath = (AppDataSource.options as any).database;
+
+  if (!dbPath || !fs.existsSync(dbPath)) {
+    return res.status(404).json({ error: "Database file not found" });
+  }
+
+  const filename = `shadowid-${new Date().toISOString().split("T")[0]}.db`;
+  res.setHeader("Content-Type", "application/octet-stream");
+  res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+
+  const fileStream = fs.createReadStream(dbPath);
+  fileStream.pipe(res);
+
+  fileStream.on("error", (err) => {
+    console.error("Error reading database file:", err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Failed to read database file" });
+    }
+  });
 });
 
 export default router;

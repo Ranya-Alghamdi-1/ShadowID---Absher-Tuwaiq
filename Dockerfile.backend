@@ -22,7 +22,8 @@ RUN npm install
 COPY backend/ml/requirements.txt ./ml/
 
 # Install Python dependencies
-RUN pip3 install --no-cache-dir -r ml/requirements.txt
+# Using --break-system-packages is safe in Docker containers (isolated environment)
+RUN pip3 install --no-cache-dir --break-system-packages -r ml/requirements.txt
 
 # Copy backend source code
 COPY backend/ ./
@@ -32,16 +33,13 @@ COPY backend/ ./
 COPY DeepLearning_Classification/ /DeepLearning_Classification/
 
 # Copy frontend directories (for serving static files)
-# From /app/dist/, ../../Frontend = /Frontend
+# From /app/src/ (where app.ts runs), ../../Frontend = /Frontend
 COPY Frontend/ /Frontend/
 # Copy dashboard directory
 COPY Dashboard-idntity/ /Dashboard-idntity/
 
-# Build TypeScript
-RUN npm run build
-
 # Expose port
 EXPOSE 3000
 
-# Start the application
+# Start the application with ts-node (no build step needed)
 CMD ["npm", "start"]

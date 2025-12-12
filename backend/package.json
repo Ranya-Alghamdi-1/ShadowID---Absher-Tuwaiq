@@ -2,11 +2,11 @@
   "name": "shadowid-backend",
   "version": "1.0.0",
   "description": "ShadowID Backend - Express.js + TypeORM + SQLite",
-  "main": "dist/app.js",
+  "main": "src/app.ts",
   "scripts": {
     "dev": "nodemon src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "ts-node src/app.ts",
     "seed:services": "ts-node src/scripts/seed-services.ts",
     "seed:users": "ts-node src/scripts/seed-users.ts",
     "seed:all": "ts-node src/scripts/seed-all.ts",
@@ -24,6 +24,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "sqlite3": "^5.1.6",
+    "ts-node": "^10.9.2",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
@@ -35,7 +36,6 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.5",
     "nodemon": "^3.0.2",
-    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
