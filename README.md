@@ -2,7 +2,7 @@
 
 A secure, temporary identity system for Saudi Arabia that allows citizens to generate time-limited "Shadow IDs" for service verification without exposing their sensitive National ID data.
 
-> **Hackathon Project:** Absher Tuwaiq - Team Basmah (فريق بصمة)
+> **Hackathon Project:** Absher Tuwaiq - (فريق بصمة)
 
 ## 🔗 Quick Links
 - **For Users (Mobile App):** [https://shadow-id.sudorw.com](https://shadow-id.sudorw.com)
